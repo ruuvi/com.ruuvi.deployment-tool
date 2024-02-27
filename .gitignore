@@ -1,33 +1,38 @@
-# Gradle files
-.gradle/
-build/
+#built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
 
 # Local configuration file (sdk path, etc)
 local.properties
 
-# Log/OS Files
-*.log
+# Windows thumbnail db
+Thumbs.db
 
-# Android Studio generated files and folders
-captures/
-.externalNativeBuild/
-.cxx/
-*.apk
-output.json
+# OSX files
+.DS_Store
 
-# IntelliJ
+# Eclipse project files
+.classpath
+.project
+
+# Android Studio
 *.iml
-.idea/
-misc.xml
-deploymentTargetDropDown.xml
-render.experimental.xml
+.idea
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
+.gradle
+build/
 
-# Keystore files
-*.jks
-*.keystore
+#NDK
+obj/
 
-# Google Services (e.g. APIs or Firebase)
-google-services.json
-
-# Android Profiling
-*.hprof
+app/release/

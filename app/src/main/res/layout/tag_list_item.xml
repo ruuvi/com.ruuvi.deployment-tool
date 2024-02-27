@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_margin="8dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <ImageView android:id="@+id/eyeImage" android:layout_width="50dp" android:layout_height="50dp" android:src="@drawable/ruuvi_eye"
+            android:layout_alignBottom="@id/dataLayout"
+           android:layout_alignTop="@id/dataLayout"
+    />
+
+    <LinearLayout android:id="@+id/dataLayout" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:layout_toRightOf="@id/eyeImage"
+                  android:layout_alignParentEnd="true"
+                  android:orientation="vertical">
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:text="Mac" android:textStyle="bold"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/mac_tw"
+                  android:textSize="16dp"
+        />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:text="Notes" android:textStyle="bold"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/notes_tw"
+                  android:textSize="16dp"
+        />
+    </LinearLayout>
+
+</RelativeLayout>
