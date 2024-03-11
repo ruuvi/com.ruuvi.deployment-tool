@@ -7,13 +7,12 @@ import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
 
 class App : Application(), LifecycleObserver {
-    lateinit var scanner: RuuviTagScanner
+    private var scanner: RuuviTagScanner? = null
+    val permissionsInteractor = PermissionsInteractor(this)
 
     override fun onCreate() {
         super.onCreate()
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
-        scanner = RuuviTagScanner()
-        scanner.Init(this)
     }
 
     fun StartScanning() {
@@ -23,11 +22,19 @@ class App : Application(), LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onEnterForeground() {
-        scanner.Start()
+        initScanner()
+        scanner?.Start()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     fun onEnterBackground() {
-        scanner.Stop()
+        scanner?.Stop()
+    }
+
+    fun initScanner() {
+        if (scanner == null && !permissionsInteractor.permissionsNeeded()) {
+            scanner = RuuviTagScanner()
+            scanner?.Init(this)
+        }
     }
 }

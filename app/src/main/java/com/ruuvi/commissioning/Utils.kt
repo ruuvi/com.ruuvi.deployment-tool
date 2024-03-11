@@ -6,7 +6,6 @@ import android.preference.PreferenceManager
 import android.content.Context
 import com.google.gson.Gson
 
-
 class Utils {
     companion object {
         fun round(value: Double, places: Int): Double {
@@ -21,7 +20,24 @@ class Utils {
             var i: Int
             var j: Int
             var `in`: Int
-            val hex = arrayOf("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")
+            val hex = arrayOf(
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "F"
+            )
             var out = ""
 
             j = 0
@@ -98,7 +114,7 @@ class Utils {
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
             if (preferences != null) {
                 val editor = preferences.edit()
-                editor.putString(TAG_KEY+tag.id, value)
+                editor.putString(TAG_KEY + tag.id, value)
                 return editor.commit()
             }
             return false
@@ -108,7 +124,7 @@ class Utils {
             var value: String? = null
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
             if (preferences != null) {
-                value = preferences.getString(TAG_KEY+mac, null)
+                value = preferences.getString(TAG_KEY + mac, null)
             }
             if (value == null) return null
             val gson = Gson()

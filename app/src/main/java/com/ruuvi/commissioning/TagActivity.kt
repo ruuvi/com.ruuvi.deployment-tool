@@ -1,24 +1,9 @@
 package com.ruuvi.commissioning
 
-import android.Manifest
-import android.app.Activity
-import android.app.AlertDialog
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.google.android.material.snackbar.Snackbar
-
 import kotlinx.android.synthetic.main.activity_tag.*
 import kotlinx.android.synthetic.main.content_tag.*
-import android.bluetooth.BluetoothAdapter
-
-
 
 class TagActivity : AppCompatActivity() {
     lateinit var ruuviTag: RuuviTagNfcResult
@@ -28,7 +13,6 @@ class TagActivity : AppCompatActivity() {
         setContentView(R.layout.activity_tag)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
 
         val mac = intent.dataString
         val tags = Utils.getTags(this).toMutableList()

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ruuvi Commissioning Tool</string>
+    <string name="app_name">Ruuvi Deployment Tool</string>
     <string name="action_export">Export</string>
     <string name="action_clear_all">Clear all</string>
     <string name="title_activity_tag">TagActivity</string>

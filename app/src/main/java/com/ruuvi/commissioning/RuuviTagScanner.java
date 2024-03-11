@@ -1,22 +1,20 @@
 package com.ruuvi.commissioning;
 
-        import android.bluetooth.BluetoothAdapter;
-        import android.bluetooth.BluetoothDevice;
-        import android.bluetooth.BluetoothManager;
-        import android.bluetooth.le.BluetoothLeScanner;
-        import android.bluetooth.le.ScanCallback;
-        import android.bluetooth.le.ScanFilter;
-        import android.bluetooth.le.ScanResult;
-        import android.bluetooth.le.ScanSettings;
-        import android.content.Context;
-        import android.location.Location;
-        import android.os.ParcelUuid;
-        import android.util.Log;
-
-        import org.jetbrains.annotations.NotNull;
-
-        import java.util.ArrayList;
-        import java.util.List;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
+import android.bluetooth.le.BluetoothLeScanner;
+import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanFilter;
+import android.bluetooth.le.ScanResult;
+import android.bluetooth.le.ScanSettings;
+import android.content.Context;
+import android.location.Location;
+import android.os.ParcelUuid;
+import android.util.Log;
+import org.jetbrains.annotations.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RuuviTagScanner {
     private static final String TAG = "RuuviTagScanner";

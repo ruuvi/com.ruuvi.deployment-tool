@@ -37,7 +37,8 @@ class NfcReaderActivity : AppCompatActivity() {
             // Supply this launch intent as the PendingIntent, set to cancel
             // one if it's already in progress. It never should be.
             val pendingIntent = PendingIntent.getActivity(
-                this, 0, launchIntent, PendingIntent.FLAG_CANCEL_CURRENT
+                this, 0, launchIntent,
+                PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_MUTABLE
             )
 
             // Define your filters and desired technology types

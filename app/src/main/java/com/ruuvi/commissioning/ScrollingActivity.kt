@@ -1,29 +1,22 @@
 package com.ruuvi.commissioning
 
-import android.Manifest
-import android.app.ActivityOptions
 import android.app.AlertDialog
 import android.bluetooth.BluetoothAdapter
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_scrolling.*
 
 class ScrollingActivity : AppCompatActivity() {
 
+    val permissionsInteractor = PermissionsInteractor(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scrolling)
@@ -104,10 +97,10 @@ class ScrollingActivity : AppCompatActivity() {
                     // party
                     (application as App).StartScanning()
                 } else {
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                    if (permissionsInteractor.checkRequestPermissionRationale(this)) {
                         requestPermissions()
                     } else {
-                        showPermissionSnackbar(this)
+                        permissionsInteractor.showPermissionSnackbar(this)
                     }
                     Toast.makeText(applicationContext, "Permission denied", Toast.LENGTH_SHORT).show()
                 }
@@ -115,49 +108,14 @@ class ScrollingActivity : AppCompatActivity() {
         }
     }
 
-    private fun showPermissionSnackbar(activity: AppCompatActivity) {
-        val snackbar = Snackbar.make(findViewById(R.id.tag_content_container), "Please enable location permission in settings.", Snackbar.LENGTH_LONG)
-        snackbar.setAction("Settings") {
-            val intent = Intent()
-            intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-            val uri = Uri.fromParts("package", activity.packageName, null)
-            intent.data = uri
-            activity.startActivity(intent)
-        }
-        snackbar.show()
-    }
-
-    fun getNeededPermissions(): List<String> {
-        val permissionCoarseLocation = ContextCompat.checkSelfPermission(this,
-            Manifest.permission.ACCESS_COARSE_LOCATION)
-
-        val listPermissionsNeeded = ArrayList<String>()
-
-        if (permissionCoarseLocation != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION)
-        }
-
-        return listPermissionsNeeded
-    }
-
-    private fun showPermissionDialog(activity: AppCompatActivity): Boolean {
-        val listPermissionsNeeded = getNeededPermissions()
-
-        if (!listPermissionsNeeded.isEmpty()) {
-            ActivityCompat.requestPermissions(activity, listPermissionsNeeded.toTypedArray(), 10)
-        }
-
-        return !listPermissionsNeeded.isEmpty()
-    }
-
     fun requestPermissions() {
-        if (getNeededPermissions().isNotEmpty()) {
+        if (permissionsInteractor.permissionsNeeded()) {
             val alertDialog = AlertDialog.Builder(this).create()
-            alertDialog.setTitle("Location permission is needed in order to scan for RuuviTags")
+            alertDialog.setTitle("Permission is needed in order to scan for RuuviTags")
             alertDialog.setButton(
                 AlertDialog.BUTTON_NEUTRAL, "Ok"
             ) { dialog, _ -> dialog.dismiss() }
-            alertDialog.setOnDismissListener { showPermissionDialog(this) }
+            alertDialog.setOnDismissListener { permissionsInteractor.showPermissionDialog(this) }
             alertDialog.show()
         } else {
             checkBluetooth()
